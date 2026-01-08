@@ -46,9 +46,8 @@ IntList::IntList(const IntList& source) {
         Node* cur = source.head->next;
         while (cur != nullptr) {
             push_back(cur->info);
-            tail = tail->next;
             cur = cur->next;
-        }
+        }   
         
     }
     //IMPLEMENT THIS
