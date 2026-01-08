@@ -12,27 +12,6 @@ struct Node {
     Node *next;
 };
 
-class IntList {
-private:
-    Node *head;
-    Node *tail;
-public:
-    IntList(); // constructor
-    ~IntList(); // destructor
-    IntList(const IntList& source); // copy constructor
-    IntList& operator=(const IntList& source); // assignment operator
-
-    void push_front(int value);
-    void push_back(int value);
-    int sum() const;
-    bool contains(int value) const;
-    int max() const;
-    double average() const;
-    int count() const;
-    void print() const;
-    
-};
-
 // copy constructor
 IntList::IntList(const IntList& source) {
     if (source.head == nullptr) {
@@ -133,6 +112,9 @@ void IntList::push_front(int value) {
     head = new Node;
     head->info = value;
     head->next = oldhead;
+    if (tail == nullptr) {
+        tail = head;
+    }
     // IMPLEMENT
 }
 
@@ -143,6 +125,9 @@ void IntList::push_back(int value) {
     tail->info = value;
     oldtail->next = tail;
     tail->next = nullptr;
+    if (head == nullptr) {
+        head = tail;
+    }
     // IMPLEMENT
  
 }
@@ -187,7 +172,6 @@ IntList& IntList::operator=(const IntList& source){
         Node* cur = source.head->next;
         while (cur != nullptr) {
             push_back(cur->info);
-            tail = tail->next;
             cur = cur->next;
         }
     }
