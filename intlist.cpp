@@ -77,14 +77,14 @@ int IntList::max() const {
         return 0;
     } else {
         Node* cur = head;
-        int max = cur->info;
+        int maxVal = cur->info;
         while (cur != nullptr) {
-            if (cur->info > max) {
-                max = cur->info;
+            if (cur->info > maxVal) {
+                maxVal = cur->info;
             }
             cur = cur->next;
         }
-        return max;
+        return maxVal;
     }
 }
 
@@ -120,13 +120,15 @@ void IntList::push_front(int value) {
 
 // append value at end of list
 void IntList::push_back(int value) {
-    Node* oldtail = tail;
-    tail = new Node;
-    tail->info = value;
-    oldtail->next = tail;
-    tail->next = nullptr;
+    Node* newNode = new Node;
+    newNode->info = value;
+    newNode->next = nullptr;
+    if (tail != nullptr) {
+        tail->next = newNode;
+    }
+    tail = newNode;
     if (head == nullptr) {
-        head = tail;
+        head = newNode;
     }
     // IMPLEMENT
  
